@@ -1,4 +1,4 @@
-# ssm-web Java Web 工程脚手架 (SSM + LayUi + Mybatis Generator +MySQL)
+# ssm-web Java Web 工程脚手架
 #### 项目架构 ####
 1.前端框架 :
 	LayUi
