@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- MYSQL -->
+	<classPathEntry
+		location="G:\apache-maven-3.3.9\Repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+
+	<context id="ssm-base" targetRuntime="MyBatis3">
+
+		<!-- 区分大小写插件 -->
+		<plugin
+			type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"></plugin>
+		<!-- 序列化插件 -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+
+		<!-- 增加分页处理 -->
+		<plugin type="com.core.generator.plugins.MysqlPaginationPlugin"></plugin>
+
+		<!-- 增加Lombok 插件处理 -->
+		<!-- 开启时需要 开发工具支持 Lombok -->
+		<!-- 开启时需要 引入 lombok jar -->
+		<!-- <plugin type="com.kuajx.dao.plugins.LombokAnnotationPlugin"></plugin> -->
+
+		<!-- 自动为Model生成swagger2文档 -->
+		<!-- 开启时需要 引入 swagger2 jar -->
+		<!-- <plugin type="com.kuajx.dao.plugins.GeneratorSwagger2DocPlugin"> -->
+		<!-- <property name="apiModelAnnotationPackage" -->
+		<!-- value="io.swagger.annotations.ApiModel" /> -->
+		<!-- <property name="apiModelPropertyAnnotationPackage" -->
+		<!-- value="io.swagger.annotations.ApiModelProperty" /> -->
+		<!-- </plugin> -->
+
+
+		<!--表注释映射到 字段属性 -->
+		<commentGenerator
+			type="com.core.generator.plugins.CommentGeneratorPlugin">
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<!-- MYSQL -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			userId="root" password="1234"
+			connectionURL="jdbc:mysql://localhost:3306/kaoqin?useSSL=false" />
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- bean 实体类 生成包 -->
+		<javaModelGenerator targetPackage="com.core.entity"
+			targetProject="./src/" />
+		<!-- mybatis Sql配置文件 -->
+		<sqlMapGenerator targetPackage="com.core.mappers"
+			targetProject="./src/" />
+		<!-- mapper Dao接口类 -->
+		<javaClientGenerator targetPackage="com.core.dao"
+			targetProject="./src/" type="XMLMAPPER" />
+
+
+		<!-- 需要代码生成的 数据库表 -->
+		<!-- tableName : 数据库表名 -->
+		<!-- domainObjectName : 实体PO名 -->
+		<!-- generatedKey 主键自增 -->
+		<!-- columnOverride 字段类型映射 例如 数据库 create_time 是 Timestamp类型 PO中需要映射成 String 
+			类型 -->
+		<table tableName="dept" domainObjectName="Dept">
+			<columnOverride column="create_time"
+				javaType="java.lang.String"></columnOverride>
+		</table>
+
+		<!-- <table tableName="biz_user" domainObjectName="User"> -->
+		<!-- <generatedKey column="id" sqlStatement="Mysql" -->
+		<!-- identity="true" /> -->
+		<!-- <columnOverride column="birthday" -->
+		<!-- javaType="java.lang.String"></columnOverride> -->
+		<!-- <columnOverride column="last_login_time" -->
+		<!-- javaType="java.lang.String"></columnOverride> -->
+		<!-- <columnOverride column="create_time" -->
+		<!-- javaType="java.lang.String"></columnOverride> -->
+		<!-- <columnOverride column="update_time" -->
+		<!-- javaType="java.lang.String"></columnOverride> -->
+		<!-- <columnOverride column="member_expire_time" -->
+		<!-- javaType="java.lang.String"></columnOverride> -->
+		<!-- <columnOverride column="member_create_time" -->
+		<!-- javaType="java.lang.String"></columnOverride> -->
+		<!-- </table> -->
+
+	</context>
+
+</generatorConfiguration>
+
